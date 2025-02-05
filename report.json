@@ -1,0 +1,90 @@
+{
+  "exercises": [
+    {
+      "name": "algorithm10.rs",
+      "result": false
+    },
+    {
+      "name": "algorithm1.rs",
+      "result": false
+    },
+    {
+      "name": "algorithm2.rs",
+      "result": false
+    },
+    {
+      "name": "algorithm3.rs",
+      "result": false
+    },
+    {
+      "name": "algorithm4.rs",
+      "result": false
+    },
+    {
+      "name": "algorithm5.rs",
+      "result": false
+    },
+    {
+      "name": "algorithm6.rs",
+      "result": false
+    },
+    {
+      "name": "algorithm7.rs",
+      "result": false
+    },
+    {
+      "name": "algorithm8.rs",
+      "result": false
+    },
+    {
+      "name": "algorithm9.rs",
+      "result": false
+    },
+    {
+      "name": "solution1",
+      "result": false
+    },
+    {
+      "name": "solution2",
+      "result": false
+    },
+    {
+      "name": "solution3",
+      "result": false
+    },
+    {
+      "name": "solution4",
+      "result": false
+    },
+    {
+      "name": "solution5",
+      "result": false
+    },
+    {
+      "name": "solutiont1",
+      "result": false
+    },
+    {
+      "name": "solutiont2",
+      "result": false
+    },
+    {
+      "name": "solutiont3",
+      "result": false
+    },
+    {
+      "name": "solutiont4",
+      "result": false
+    },
+    {
+      "name": "solutiont5",
+      "result": false
+    }
+  ],
+  "statistics": {
+    "total_exercises": 20,
+    "total_successes": 0,
+    "total_failures": 20,
+    "total_time": 0
+  }
+}
