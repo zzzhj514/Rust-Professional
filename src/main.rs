@@ -135,7 +135,7 @@ fn evaluate_exercises_from_config(mode: &str, config: ExerciseConfig, report: &m
 
 
 fn evaluate_exercise(exercise: &Exercise) -> bool {
-    let exercise_path = PathBuf::from(&exercise.path);
+    let exercise_path = PathBuf::from(&format!("./exercises/{}", exercise.path));
     match exercise.exercise_type.as_str() {
         "single_file" => evaluate_single_file(&exercise_path),
         "cargo_project" => evaluate_cargo_project(&exercise_path),
