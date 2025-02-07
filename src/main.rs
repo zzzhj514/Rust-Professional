@@ -11,6 +11,7 @@ struct Exercise {
     path: String,
     #[serde(rename = "type")]
     exercise_type: String,  // 解析 JSON 中的 `type` 字段
+    score: i32, // 新增：每道题目的分值
 }
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -24,6 +25,7 @@ struct ExerciseConfig {
 struct ExerciseResult {
     name: String,
     result: bool,
+    score: i32, // 新增：每道题目的分数
 }
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -31,6 +33,7 @@ struct Statistics {
     total_exercises: usize,
     total_successes: usize,
     total_failures: usize,
+    total_score: i32, // 新增：总分
     total_time: u64,
 }
 
@@ -66,6 +69,7 @@ fn main() {
             total_exercises: 0,
             total_successes: 0,
             total_failures: 0,
+            total_score: 0, // 初始化总分
             total_time: 0,
         },
     };
@@ -82,6 +86,7 @@ fn main() {
     println!("Total exercises: {}", report.statistics.total_exercises);
     println!("Total successes: {}", report.statistics.total_successes);
     println!("Total failures: {}", report.statistics.total_failures);
+    println!("Total score: {}", report.statistics.total_score); // 输出总分
 
     // **保存报告**
     if let Err(e) = save_report_to_json("report.json", &report) {
@@ -104,9 +109,13 @@ fn evaluate_exercises_from_config(mode: &str, config: ExerciseConfig, report: &m
         println!("\nEvaluating {}: {}", exercise.exercise_type, exercise.name);
         let result = evaluate_exercise(&exercise);
 
+        // 根据习题评测结果，更新报告
+        let score = if result { exercise.score } else { 0 };
+
         report.exercises.push(ExerciseResult {
             name: exercise.name.clone(),
             result,
+            score, // 保存每道题目的分数
         });
 
         if result {
@@ -114,6 +123,9 @@ fn evaluate_exercises_from_config(mode: &str, config: ExerciseConfig, report: &m
         } else {
             report.statistics.total_failures += 1;
         }
+
+        // 累加分数
+        report.statistics.total_score += score;
 
         if mode == "watch" && !ask_to_continue() {
             break;

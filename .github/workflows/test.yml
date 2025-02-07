@@ -38,7 +38,7 @@ jobs:
 
         # 提取需要的值
         total_exercations=$(jq '.statistics.total_exercises' $outfile)
-        total_succeeds=$(jq '.statistics.total_successes' $outfile)
+        total_succeeds=$(jq '.statistics.total_score' $outfile)
         github_user="${{ github.actor }}"
 
         # 生成新的 JSON 内容
@@ -48,7 +48,7 @@ jobs:
           --arg ext "aaa" \
           --arg name "$github_user" \
           --argjson score "$total_succeeds" \
-          --argjson totalScore "$total_exercations" \
+          --argjson totalScore 100 \
           '{channel: $channel, courseId: $courseId, ext: $ext, name: $name, score: $score, totalScore: $totalScore}')
 
         # 保存新的 JSON 文件
