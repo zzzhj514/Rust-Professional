@@ -3,6 +3,8 @@
 	This question requires you to use a stack to achieve a bracket match
 */
 
+use std::sync::Barrier;
+
 
 #[derive(Debug)]
 struct Stack<T> {
@@ -31,7 +33,8 @@ impl<T> Stack<T> {
 		self.size += 1;
 	}
 	fn pop(&mut self) -> Option<T> {
-		// TODO
+		self.data.pop();
+        self.size -= 1;
 		None
 	}
 	fn peek(&self) -> Option<&T> {
@@ -101,8 +104,41 @@ impl<'a, T> Iterator for IterMut<'a, T> {
 
 fn bracket_match(bracket: &str) -> bool
 {
+    let left: Vec<char> = vec!['{','[','('];
+    let right: Vec<char> = vec!['}',']',')'];
 	//TODO
-	true
+    let mut s = Stack::new();
+    for char in bracket.chars(){
+       if left.contains(&char){
+            s.push(Some(char));
+            continue;
+       }
+       if right.contains(&char){
+            if !s.is_empty(){
+                if let Some(top) = *s.peek().unwrap(){
+                    if !matches_pair(top, char){
+                        break;
+                    }else {
+                        s.pop();
+                    }
+                }
+            }else {
+                return false;
+            }
+        }    
+
+    }
+    if s.is_empty(){
+        return true;
+    }
+    return false;
+}
+
+fn matches_pair(left: char, right: char) -> bool {
+    match (left, right) {
+        ('{', '}') | ('[', ']') | ('(', ')') => true,
+        _ => false,
+    }
 }
 
 #[cfg(test)]

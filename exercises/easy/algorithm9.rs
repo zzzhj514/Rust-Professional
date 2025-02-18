@@ -6,11 +6,13 @@
 
 use std::cmp::Ord;
 use std::default::Default;
+use std::mem;
 
 pub struct Heap<T>
 where
     T: Default,
 {
+    next_idx:usize,
     count: usize,
     items: Vec<T>,
     comparator: fn(&T, &T) -> bool,
@@ -22,6 +24,7 @@ where
 {
     pub fn new(comparator: fn(&T, &T) -> bool) -> Self {
         Self {
+            next_idx:0,
             count: 0,
             items: vec![T::default()],
             comparator,
@@ -38,7 +41,24 @@ where
 
     pub fn add(&mut self, value: T) {
         //TODO
+        self.next_idx = 0;
+        self.count += 1;  
+        let mut index = self.count;  
+    
+
+        self.items.push(value);
+    
+        while index > 1 {
+            let parent_idx = self.parent_idx(index);
+            if (self.comparator)(&self.items[index], &self.items[parent_idx]) {
+                self.items.swap(index, parent_idx);
+                index = parent_idx;
+            } else {
+                break;
+            }
+        }
     }
+    
 
     fn parent_idx(&self, idx: usize) -> usize {
         idx / 2
@@ -58,8 +78,20 @@ where
 
     fn smallest_child_idx(&self, idx: usize) -> usize {
         //TODO
-		0
+        let left_child_idx = self.left_child_idx(idx);
+        let right_child_idx = self.right_child_idx(idx);
+    
+        if right_child_idx > self.count {
+            left_child_idx
+        } else {
+            if (self.comparator)(&self.items[left_child_idx], &self.items[right_child_idx]) {
+                left_child_idx
+            } else {
+                right_child_idx
+            }
+        }
     }
+
 }
 
 impl<T> Heap<T>
@@ -80,12 +112,35 @@ where
 impl<T> Iterator for Heap<T>
 where
     T: Default,
+    T: Clone
 {
     type Item = T;
 
     fn next(&mut self) -> Option<T> {
-        //TODO
-		None
+        if self.is_empty() {
+            return None;
+        }
+
+        let last_idx = self.count;
+        self.items.swap(1, last_idx);
+
+        let result = self.items.pop().unwrap();
+        self.count -= 1;
+
+        if self.count > 0 {
+            let mut idx = 1;
+            while self.children_present(idx) {
+                let smallest_child_idx = self.smallest_child_idx(idx);
+                if (self.comparator)(&self.items[smallest_child_idx], &self.items[idx]) {
+                    self.items.swap(idx, smallest_child_idx);
+                    idx = smallest_child_idx;
+                } else {
+                    break;
+                }
+            }
+        }
+
+        Some(result)
     }
 }
 

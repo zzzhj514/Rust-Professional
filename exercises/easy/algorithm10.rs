@@ -30,6 +30,23 @@ impl Graph for UndirectedGraph {
     }
     fn add_edge(&mut self, edge: (&str, &str, i32)) {
         //TODO
+        if !self.adjacency_table.contains_key(edge.0){
+            self.add_node(edge.0);
+        }
+        if !self.adjacency_table.contains_key(edge.1){
+            self.add_node(edge.1);
+        }
+
+        if let Some(v) = self.adjacency_table_mutable().get_mut(edge.0) {
+            v.push((edge.1.to_string(), edge.2));
+        } else {
+            panic!("Key {} not found in adjacency table", edge.0);
+        }
+        if let Some(v) = self.adjacency_table_mutable().get_mut(edge.1) {
+            v.push((edge.0.to_string(), edge.2));
+        } else {
+            panic!("Key {} not found in adjacency table", edge.1);
+        }
     }
 }
 pub trait Graph {
@@ -38,10 +55,17 @@ pub trait Graph {
     fn adjacency_table(&self) -> &HashMap<String, Vec<(String, i32)>>;
     fn add_node(&mut self, node: &str) -> bool {
         //TODO
+        let v: Vec<(String, i32)> = Vec::new();
+        self.adjacency_table_mutable().insert(node.to_string(), v);
 		true
     }
     fn add_edge(&mut self, edge: (&str, &str, i32)) {
         //TODO
+        if let Some(v) = self.adjacency_table_mutable().get_mut(edge.0) {
+            v.push((edge.1.to_string(), edge.2));
+        } else {
+            panic!("Key {} not found in adjacency table", edge.0);
+        }
     }
     fn contains(&self, node: &str) -> bool {
         self.adjacency_table().get(node).is_some()
