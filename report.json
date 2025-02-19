@@ -52,53 +52,53 @@
     },
     {
       "name": "algorithm11.rs",
-      "result": false,
-      "score": 0
+      "result": true,
+      "score": 1
     },
     {
       "name": "algorithm12.rs",
-      "result": false,
-      "score": 0
+      "result": true,
+      "score": 1
     },
     {
       "name": "algorithm13.rs",
-      "result": false,
-      "score": 0
+      "result": true,
+      "score": 1
     },
     {
       "name": "algorithm14.rs",
-      "result": false,
-      "score": 0
+      "result": true,
+      "score": 1
     },
     {
       "name": "algorithm15.rs",
-      "result": false,
-      "score": 0
+      "result": true,
+      "score": 1
     },
     {
       "name": "algorithm16.rs",
-      "result": false,
-      "score": 0
+      "result": true,
+      "score": 1
     },
     {
       "name": "algorithm17.rs",
-      "result": false,
-      "score": 0
+      "result": true,
+      "score": 1
     },
     {
       "name": "algorithm18.rs",
-      "result": false,
-      "score": 0
+      "result": true,
+      "score": 1
     },
     {
       "name": "algorithm19.rs",
-      "result": false,
-      "score": 0
+      "result": true,
+      "score": 1
     },
     {
       "name": "algorithm20.rs",
-      "result": false,
-      "score": 0
+      "result": true,
+      "score": 1
     },
     {
       "name": "solution1",
@@ -153,9 +153,9 @@
   ],
   "statistics": {
     "total_exercises": 30,
-    "total_successes": 10,
-    "total_failures": 20,
-    "total_score": 10,
-    "total_time": 50
+    "total_successes": 20,
+    "total_failures": 10,
+    "total_score": 20,
+    "total_time": 43
   }
 }

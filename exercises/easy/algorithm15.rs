@@ -13,7 +13,25 @@ use std::fmt::{self, Display, Formatter};
 
 pub fn longest_substring_without_repeating_chars(s: String) -> i32 {
     // TODO: Implement the logic to find the longest substring without repeating characters
-    0 // Placeholder return value
+    let mut res = 0;  // Placeholder return value
+    let mut rres = 0;
+    let mut sss:Vec<char> = s.chars().collect();
+    let mut buffer = Vec::new();
+    for index in 0..sss.len(){
+        if !buffer.contains(&sss[index]){
+            buffer.push(sss[index]);
+            rres += 1;
+        }else {
+            buffer.clear();
+            if rres > res{
+                res = rres;
+            }
+            buffer.push(sss[index]);
+            rres = 1;
+        }
+    }
+
+    std::cmp::max(res,rres)
 }
 
 #[cfg(test)]
