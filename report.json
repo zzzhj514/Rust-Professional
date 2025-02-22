@@ -127,8 +127,8 @@
     },
     {
       "name": "solutiont1",
-      "result": false,
-      "score": 0
+      "result": true,
+      "score": 10
     },
     {
       "name": "solutiont2",
@@ -147,15 +147,15 @@
     },
     {
       "name": "solutiont5",
-      "result": false,
-      "score": 0
+      "result": true,
+      "score": 10
     }
   ],
   "statistics": {
     "total_exercises": 30,
-    "total_successes": 25,
-    "total_failures": 5,
-    "total_score": 50,
-    "total_time": 37
+    "total_successes": 27,
+    "total_failures": 3,
+    "total_score": 70,
+    "total_time": 38
   }
 }
